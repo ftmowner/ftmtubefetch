@@ -2,7 +2,7 @@
 ## 🔴 Fᴛᴍ TᴜʙᴇFᴇᴛᴄʜ - A YouTube Video Download Bot V3  
 ###### A powerful Telegram bot to download YouTube videos in any quality!  
 
-![logo]([https://envs.sh/S67.jpg])
+![logo]([https://ibb.co/wF1gFjcq])
 
 ---
 
@@ -59,13 +59,18 @@ Bot replies:
 **🎬 Video Title: Never Gonna Give You Up**
 
 **Select a quality: 🔹 1080p 📽️ 🔹 720p 📽️ 🔹 480p 📽️ 🔹 🔊 Audio Only**
+
 After selecting a quality, the bot **downloads and sends the file automatically**.  
 
 ---
 
 ## 🤖 Bot Commands
 
-/start - Check if the bot is online 🔔 /help - How to use the bot 🆘 /about - About the bot 😌
+/start - Check if the bot is online 🔔 
+
+/help - How to use the bot 🆘 
+
+/about - About the bot 😌
 
 ---
 
