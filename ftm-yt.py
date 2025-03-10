@@ -2,7 +2,6 @@ import os
 import logging
 import datetime
 import yt_dlp
-from pytube import YouTube
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
@@ -16,6 +15,9 @@ logging.basicConfig(level=logging.INFO)
 
 # Initialize bot
 app = Client("YouTubeDownloader", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
+
+# Store links to prevent losing them
+youtube_links = {}
 
 # Custom start message
 @app.on_message(filters.command("start"))
@@ -43,61 +45,13 @@ Opened at **{current_time}**
     await message.reply_text(start_text, reply_markup=keyboard, disable_web_page_preview=True)
 
 
-# Fetch available qualities
-@app.on_message(filters.text & filters.regex(r"https?://(www\.)?youtube\.com/watch\?v="))
+# Fetch available qualities using `yt-dlp`
+@app.on_message(filters.text & filters.regex(r"(https?:\/\/)?(www\.|m\.)?(youtube\.com|youtu\.?be)\/.+"))
 async def fetch_qualities(client, message):
     url = message.text
-    try:
-        yt = YouTube(url)
-        streams = yt.streams.filter(progressive=True, file_extension="mp4").order_by("resolution").desc()
+    youtube_links[message.chat.id] = url  # Save the link
+    print(f"Received YouTube link: {url}")  # Debugging
 
-        buttons = []
-        for stream in streams:
-            res = stream.resolution
-            btn_text = f"{res} 📽️"
-            buttons.append([InlineKeyboardButton(btn_text, callback_data=f"pytube_{stream.itag}")])
-
-        # Add audio-only option
-        audio_stream = yt.streams.filter(only_audio=True).first()
-        buttons.append([InlineKeyboardButton("🔊 Audio Only", callback_data=f"pytube_{audio_stream.itag}")])
-
-        # If `pytube` fails, add `yt-dlp` as backup
-        buttons.append([InlineKeyboardButton("🔄 Try Alternative (yt-dlp)", callback_data="ytdlp")])
-
-        keyboard = InlineKeyboardMarkup(buttons)
-        await message.reply_text(f"🎬 **{yt.title}**\n\nSelect a quality:", reply_markup=keyboard)
-
-    except Exception as e:
-        await message.reply_text(f"⚠️ `pytube` failed: {str(e)}\n\n🔄 Switching to `yt-dlp`...")
-        await fetch_qualities_ytdlp(client, message)
-
-
-# Download using `pytube`
-@app.on_callback_query(filters.regex(r"pytube_\d+"))
-async def download_pytube(client, callback_query):
-    itag = int(callback_query.data.split("_")[1])
-    url = callback_query.message.reply_to_message.text
-    try:
-        yt = YouTube(url)
-        stream = yt.streams.get_by_itag(itag)
-        file_path = stream.download()
-
-        await callback_query.message.reply_text("📥 Downloading... Please wait.")
-
-        # Send file to user
-        await callback_query.message.reply_video(video=file_path, caption="✅ Download Complete!")
-
-        # Remove file after sending
-        os.remove(file_path)
-
-    except Exception as e:
-        await callback_query.message.reply_text(f"❌ `pytube` failed: {str(e)}\n\n🔄 Trying `yt-dlp`...")
-        await download_ytdlp(client, callback_query)
-
-
-# Fetch available qualities using `yt-dlp`
-async def fetch_qualities_ytdlp(client, message):
-    url = message.text
     try:
         ydl_opts = {"quiet": True, "cookiefile": "cookies.txt"}
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -110,7 +64,6 @@ async def fetch_qualities_ytdlp(client, message):
                 res = f"{fmt.get('height')}p"
                 buttons.append([InlineKeyboardButton(res, callback_data=f"ytdlp_{fmt['format_id']}")])
 
-        # Add audio-only option
         buttons.append([InlineKeyboardButton("🔊 Audio Only", callback_data="ytdlp_audio")])
 
         keyboard = InlineKeyboardMarkup(buttons)
@@ -124,8 +77,12 @@ async def fetch_qualities_ytdlp(client, message):
 @app.on_callback_query(filters.regex(r"ytdlp_"))
 async def download_ytdlp(client, callback_query):
     format_id = callback_query.data.split("_")[1]
-    url = callback_query.message.reply_to_message.text
-    file_path = None
+    chat_id = callback_query.message.chat.id
+    url = youtube_links.get(chat_id)  # Retrieve stored link
+    
+    if not url:
+        await callback_query.message.reply_text("❌ Error: Unable to find the original YouTube link.")
+        return
 
     try:
         ydl_opts = {
@@ -139,14 +96,7 @@ async def download_ytdlp(client, callback_query):
             file_path = ydl.prepare_filename(info)
 
         await callback_query.message.reply_text("📥 Downloading... Please wait.")
-
-        # Send file to user
-        if format_id == "audio":
-            await callback_query.message.reply_audio(audio=file_path, caption="✅ Download Complete!")
-        else:
-            await callback_query.message.reply_video(video=file_path, caption="✅ Download Complete!")
-
-        # Remove file after sending
+        await callback_query.message.reply_video(video=file_path, caption="✅ Download Complete!")
         os.remove(file_path)
 
     except Exception as e:
