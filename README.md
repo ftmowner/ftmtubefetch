@@ -1,6 +1,6 @@
 
 ## 🔴 Fᴛᴍ TᴜʙᴇFᴇᴛᴄʜ - A YouTube Video Download Bot V3  
-###### A powerful Telegram bot to download YouTube videos in any quality!  
+#### A powerful Telegram bot to download YouTube videos in any quality!  
 
  ![logo](https://raw.githubusercontent.com/ftmdeveloperz/ftmtubefetch/main/logo.jpg).
 ---
@@ -25,7 +25,7 @@ To configure the bot, set the following environment variables:
 - **`API_ID`** → Get from [my.telegram.org](https://my.telegram.org/)  
 - **`API_HASH`** → Get from [my.telegram.org](https://my.telegram.org/)  
 - **`BOT_TOKEN`** → Get from [@BotFather](https://t.me/BotFather)  
-- **`COOKIES.txt`** → Add your YouTube cookies file  
+- **`COOKIES.txt`** → Add your YouTube cookies file (given one in repo is fake or not valid) 
 
 ---
 
