@@ -76,7 +76,7 @@ After selecting a quality, the bot **downloads and sends the file automatically*
 
 # 🚀 Future Updates: Premium & Admin System  
 
-We are working on adding a **Premium System** and **Admin Management** with the following features:  
+We are working on adding a **Premium System**, **Cloning System** and **Admin Management** with the following features:  
 
 ---
 
@@ -108,7 +108,7 @@ We are working on adding a **Premium System** and **Admin Management** with the 
 
 ---
 
-## **🔹 Bot Commands for Premium & Admins**  
+## **🔹 Bot Commands for Admins related with subscription management**  
 | Command | Who Can Use? | Function |  
 |---------|-------------|----------|  
 | `/premium` | Everyone | Shows available plans |  
