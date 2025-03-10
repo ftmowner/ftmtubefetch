@@ -2,7 +2,7 @@
 ## 🔴 Fᴛᴍ TᴜʙᴇFᴇᴛᴄʜ - A YouTube Video Download Bot V3  
 ###### A powerful Telegram bot to download YouTube videos in any quality!  
 
-![logo](https://graph.org/file/754b7faa1308a13fc917f.jpg)
+![logo]([https://envs.sh/S67.jpg])
 
 ---
 
