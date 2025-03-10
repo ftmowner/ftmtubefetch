@@ -72,7 +72,65 @@ After selecting a quality, the bot **downloads and sends the file automatically*
 /about - About the bot 😌
 
 ---
+---
 
+# 🚀 Future Updates: Premium & Admin System  
+
+We are working on adding a **Premium System** and **Admin Management** with the following features:  
+
+---
+
+## **🔹 Premium Subscription System**  
+✅ **Limit free users to 10 downloads per day.**  
+✅ **Premium users get unlimited downloads based on their plan.**  
+✅ **Users must send payment proof to the Owner (`@ftmdeveloperz`).**  
+✅ **7-8 different premium plans starting from ₹2/month.**  
+✅ **Ultra+ plans allow users to create their own bot using `/clone`.**  
+
+### **💰 Premium Subscription Plans**  
+| Plan Name  | Price  | Benefits |  
+|------------|--------|----------|  
+| **Basic** | ₹2/month  | 20 downloads/day  |  
+| **Standard** | ₹5/month  | 50 downloads/day  |  
+| **Pro** | ₹10/month  | Unlimited downloads  |  
+| **Ultra** | ₹25/month | Unlimited + Clone Bot Access  |  
+| **Premium+** | ₹50/month | Unlimited + Clone + Faster Downloads  |  
+| **Lifetime** | ₹99 (one-time) | Unlimited Forever + Clone Access  |  
+
+---
+
+## **🔹 Admin & Owner System**  
+✅ **Multiple Admins** (Admins can manage premium users but NOT other admins).  
+✅ **Admins get Pro subscription (unlimited downloads) by default.**  
+✅ **Admins must pay for Ultra & higher plans if they want clone access.**  
+✅ **Only the Owner (`@ftmdeveloperz`) can add/remove admins.**  
+✅ **Admins can upgrade users but cannot make new admins.**  
+
+---
+
+## **🔹 Bot Commands for Premium & Admins**  
+| Command | Who Can Use? | Function |  
+|---------|-------------|----------|  
+| `/premium` | Everyone | Shows available plans |  
+| `/myplan` | Premium Users | Shows current subscription |  
+| `/add_premium user_id plan_name` | Admin/Owner | Manually upgrades a user |  
+| `/remove_premium user_id` | Admin/Owner | Removes premium access |  
+| `/add_admin user_id` | Owner | Makes a user an admin |  
+| `/remove_admin user_id` | Owner | Removes admin access |  
+| `/admins` | Everyone | Shows a list of all admins |  
+
+---
+
+## 📢 My Community Details  
+🔹 **YouTube Channel:** [Telegram Bots 🤖](https://youtube.com/@ftmbotzx?feature=shared)  
+🔹 **Telegram Channel:** [FTM Botzx ❤️‍🩹](https://t.me/ftmbotzx)  
+🔹 **Telegram Group:** [FTM Botzx Support 🎗️](https://t.me/ftmbotzx_SUPPORT)  
+🔹 **Bot Link:** [YouTube Downloader Bot 🤖](https://t.me/ftmbotzx_ytdownloaderbot)  
+🔹 **Developer:** [Fᴛᴍ Dᴇᴠᴇʟᴏᴘᴇʀᴢ 👑](https://t.me/ftmdeveloperz)  
+
+---
+
+🚀 **This README is now complete!** Let me know if you need further changes! 🔥
 ## ☕ Support the Developer
 If you love this bot, consider **buying me a coffee!** 🥹  
 <a href="https://www.buymeacoffee.com/ftmdeveloperz" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/arial-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;"></a>
